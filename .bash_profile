@@ -58,7 +58,7 @@ git config --global color.ui true
 git config --global format.pretty oneline
 git config --global core.autocrl input
 git config --global core.fileMode true
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.log "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias push='git pull origin master && git push origin master'
 alias pull='git pull origin master'
 alias clone='git clone $1'
@@ -102,3 +102,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
                                   }
 
                                   complete -F _fab_completion fab
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
