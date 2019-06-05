@@ -27,6 +27,8 @@ alias stop_mysql='sudo $MYSQL_HOME/bin/mysqladmin shutdown'
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+export LESS=-RFX
+
 # Bash
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx # dark background
 alias ls='ls -laghFG'
