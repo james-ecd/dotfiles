@@ -61,3 +61,8 @@ export PATH
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
+export PATH=$PATH:$HOME/bin
+
+# kube
+alias token-dev="aws eks get-token --cluster-name eks-vsuite-dev | jq -r '.status.token'"
+alias kube-dash="kubectl proxy"
