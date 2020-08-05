@@ -44,10 +44,14 @@ alias clone='git clone $1'
 # git tab completion
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
-fi 
+fi
+
+# git alias
+alias git-delete-all-branches="git branch | grep -v "master" | xargs git branch -D"
+alias gc="git commit -asv"
 
 # github create dev-new pr alias
-alias ghpr="gh pr create -B dev-new -w"
+alias ghpr="gh pr create -B dev -w"
 
 # Finder: show hiddeh files
 defaults write com.apple.finder AppleShowAllFiles TRUE
@@ -63,6 +67,23 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
 export PATH=$PATH:$HOME/bin
 
+# Setting PATH for Python 3.8
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
 # kube
 alias token-dev="aws eks get-token --cluster-name eks-vsuite-dev | jq -r '.status.token'"
 alias kube-dash="kubectl proxy"
+alias jenkins-tunnel="ssh -L 5678:vsuite-prod-new-james-copy.cpom0k8rgfjc.us-east-1.rds.amazonaws.com:5432 goose@3.219.27.102"
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+alias pr="poetry run"
+alias prs="poetry run python manage.py runserver"
+
+# hack for psycopg2 pip install - links to brews openssl install
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/curl/lib -L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/curl/include -I/user/local/opt/openssl/include"
+
+# flake8 alias ignoring debug.py files
+alias f8="pr flake8 --exclude debug.py"
