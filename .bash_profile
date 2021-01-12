@@ -50,6 +50,11 @@ fi
 alias git-delete-all-branches="git branch | grep -v "master" | xargs git branch -D"
 alias gc="git commit -asv"
 
+function gcb() {
+    git checkout -b $@ 
+    git push -u origin $@
+}
+
 # github create dev-new pr alias
 alias ghpr="gh pr create -B dev -w"
 
@@ -72,13 +77,17 @@ export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
 # kube
 alias token-dev="aws eks get-token --cluster-name eks-vsuite-dev | jq -r '.status.token'"
-alias kube-dash="kubectl proxy"
-alias jenkins-tunnel="ssh -L 5678:vsuite-prod-new-james-copy.cpom0k8rgfjc.us-east-1.rds.amazonaws.com:5432 goose@3.219.27.102"
+alias token-prod="aws eks get-token --cluster-name eks-vsuite-prod | jq -r '.status.token'"
+alias kube-dev="kubectl proxy"
+alias kube-prod="kubectl --kubeconfig=/Users/james.davis/.kube/eksctl/clusters/eks-vsuite-prod proxy --port 8001"
+alias script-container="kubectl exec --stdin --tty -n scripts $(kubectl get pod -n scripts -l app=vsuite-script -o jsonpath="{.items[0].metadata.name}") -- /bin/bash"
+alias script-output="kubectl cp -n scripts $(kubectl get pod -n scripts -l app=vsuite-script -o jsonpath="{.items[0].metadata.name}"):/app/vsuite-backend/scripts/output/"
 
 # poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 alias pr="poetry run"
 alias prs="poetry run python manage.py runserver"
+alias prt="poetry run pytest -n auto"
 
 # hack for psycopg2 pip install - links to brews openssl install
 export PATH="/usr/local/opt/openssl/bin:$PATH"
@@ -87,3 +96,7 @@ export CPPFLAGS="-I/usr/local/opt/curl/include -I/user/local/opt/openssl/include
 
 # flake8 alias ignoring debug.py files
 alias f8="pr flake8 --exclude debug.py"
+
+# manage ssh keys
+alias vsuite-key="ssh-add -D; ssh-add ~/.ssh/id_rsa"
+alias jamsong-key="ssh-add -D; ssh-add ~/.ssh/id_rsa_jamsong8"
