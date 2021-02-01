@@ -96,7 +96,3 @@ export CPPFLAGS="-I/usr/local/opt/curl/include -I/user/local/opt/openssl/include
 
 # flake8 alias ignoring debug.py files
 alias f8="pr flake8 --exclude debug.py"
-
-# manage ssh keys
-alias vsuite-key="ssh-add -D; ssh-add ~/.ssh/id_rsa"
-alias jamsong-key="ssh-add -D; ssh-add ~/.ssh/id_rsa_jamsong8"
